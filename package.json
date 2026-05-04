@@ -1,0 +1,8 @@
+{
+  "name": "coupang-seller",
+  "private": true,
+  "version": "0.3.0",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build"
+  }
+}
