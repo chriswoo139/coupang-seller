@@ -49,6 +49,13 @@ app.add_middleware(
 )
 
 
+@app.middleware("http")
+async def strip_api_prefix_for_serverless(request, call_next):
+    if request.scope.get("path", "").startswith("/api/"):
+        request.scope["path"] = request.scope["path"][4:]
+    return await call_next(request)
+
+
 class ProfitCalculationRequest(BaseModel):
     competitor_id: int | None = None
     scenario_name: str = "Manual Scenario"
