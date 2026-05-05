@@ -83,6 +83,7 @@ npm run dev
 ```text
 coupang_product_research_tool/
   app.py
+  api.py
   backend_api.py
   package.json
   vercel.json

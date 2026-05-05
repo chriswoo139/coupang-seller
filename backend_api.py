@@ -9,11 +9,13 @@ from pydantic import BaseModel, Field
 
 from modules.coupang_api import CoupangOpenApiClient
 from modules.database import (
+    DATA_DIR,
     fetch_all_competitors,
     fetch_competitor_by_id,
     fetch_profit_history,
     init_db,
     insert_profit_calculation,
+    seed_sample_data_if_empty,
 )
 from modules.keyword_generator import generate_keywords
 from modules.profit_calculator import ProfitInput, calculate_profit, scenario_table
@@ -28,6 +30,7 @@ app = FastAPI(
 )
 
 init_db()
+seed_sample_data_if_empty(DATA_DIR / "sample_competitors.csv")
 
 default_origins = [
     "http://127.0.0.1:5173",
@@ -36,6 +39,8 @@ default_origins = [
     "http://localhost:4173",
     "http://127.0.0.1:8501",
     "http://localhost:8501",
+    "https://coupang-seller-tool.vercel.app",
+    "https://frontend-three-khaki-40okns514r.vercel.app",
 ]
 extra_origins = [origin.strip() for origin in os.getenv("ALLOWED_ORIGINS", "").split(",") if origin.strip()]
 
